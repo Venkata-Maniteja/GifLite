@@ -1,0 +1,389 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B8603B3A1BC6BB8E00A5D642 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8603B391BC6BB8E00A5D642 /* main.m */; };
+		B8603B3D1BC6BB8E00A5D642 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8603B3C1BC6BB8E00A5D642 /* AppDelegate.m */; };
+		B8603B401BC6BB8E00A5D642 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8603B3F1BC6BB8E00A5D642 /* ViewController.m */; };
+		B8603B431BC6BB8E00A5D642 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8603B411BC6BB8E00A5D642 /* Main.storyboard */; };
+		B8603B451BC6BB8E00A5D642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8603B441BC6BB8E00A5D642 /* Assets.xcassets */; };
+		B8603B481BC6BB8E00A5D642 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8603B461BC6BB8E00A5D642 /* LaunchScreen.storyboard */; };
+		B8603B511BC6BFB500A5D642 /* myDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8603B501BC6BFB500A5D642 /* myDrawView.m */; settings = {ASSET_TAGS = (); }; };
+		B8603B531BC6C87000A5D642 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8603B521BC6C87000A5D642 /* ImageIO.framework */; };
+		B8603B551BC6C87D00A5D642 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8603B541BC6C87D00A5D642 /* MobileCoreServices.framework */; };
+		B898C4CE1BC80767007616CE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B898C4CD1BC80767007616CE /* MessageUI.framework */; };
+		E028489B9E8321CFD902A433 /* libPods-DrawAndSend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A986D4C429798EC1E700F16C /* libPods-DrawAndSend.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A986D4C429798EC1E700F16C /* libPods-DrawAndSend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawAndSend.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8603B351BC6BB8D00A5D642 /* DrawAndSend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawAndSend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8603B391BC6BB8E00A5D642 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B8603B3B1BC6BB8E00A5D642 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B8603B3C1BC6BB8E00A5D642 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B8603B3E1BC6BB8E00A5D642 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B8603B3F1BC6BB8E00A5D642 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B8603B421BC6BB8E00A5D642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B8603B441BC6BB8E00A5D642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B8603B471BC6BB8E00A5D642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B8603B491BC6BB8E00A5D642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8603B4F1BC6BFB500A5D642 /* myDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myDrawView.h; sourceTree = "<group>"; };
+		B8603B501BC6BFB500A5D642 /* myDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myDrawView.m; sourceTree = "<group>"; };
+		B8603B521BC6C87000A5D642 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B8603B541BC6C87D00A5D642 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		B898C4CD1BC80767007616CE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		B898C4CF1BC810A3007616CE /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-20151007/FBSDKMessengerShareKit.framework"; sourceTree = "<group>"; };
+		B898C4D11BC812B4007616CE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-20151007/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		E550CE5DA5009B7E24EEE1CA /* Pods-DrawAndSend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawAndSend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrawAndSend/Pods-DrawAndSend.debug.xcconfig"; sourceTree = "<group>"; };
+		F06B2C41F2A77673E3E1F09F /* Pods-DrawAndSend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawAndSend.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawAndSend/Pods-DrawAndSend.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B8603B321BC6BB8D00A5D642 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B898C4CE1BC80767007616CE /* MessageUI.framework in Frameworks */,
+				B8603B551BC6C87D00A5D642 /* MobileCoreServices.framework in Frameworks */,
+				B8603B531BC6C87000A5D642 /* ImageIO.framework in Frameworks */,
+				E028489B9E8321CFD902A433 /* libPods-DrawAndSend.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14C09E2399CC92E3A6364F10 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E550CE5DA5009B7E24EEE1CA /* Pods-DrawAndSend.debug.xcconfig */,
+				F06B2C41F2A77673E3E1F09F /* Pods-DrawAndSend.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		39900C3477F32987B9D5A91E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B898C4D11BC812B4007616CE /* FBSDKCoreKit.framework */,
+				B898C4CF1BC810A3007616CE /* FBSDKMessengerShareKit.framework */,
+				B898C4CD1BC80767007616CE /* MessageUI.framework */,
+				A986D4C429798EC1E700F16C /* libPods-DrawAndSend.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8603B2C1BC6BB8D00A5D642 = {
+			isa = PBXGroup;
+			children = (
+				B8603B541BC6C87D00A5D642 /* MobileCoreServices.framework */,
+				B8603B521BC6C87000A5D642 /* ImageIO.framework */,
+				B8603B371BC6BB8D00A5D642 /* DrawAndSend */,
+				B8603B361BC6BB8D00A5D642 /* Products */,
+				14C09E2399CC92E3A6364F10 /* Pods */,
+				39900C3477F32987B9D5A91E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B8603B361BC6BB8D00A5D642 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B8603B351BC6BB8D00A5D642 /* DrawAndSend.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B8603B371BC6BB8D00A5D642 /* DrawAndSend */ = {
+			isa = PBXGroup;
+			children = (
+				B8603B3B1BC6BB8E00A5D642 /* AppDelegate.h */,
+				B8603B3C1BC6BB8E00A5D642 /* AppDelegate.m */,
+				B8603B3E1BC6BB8E00A5D642 /* ViewController.h */,
+				B8603B3F1BC6BB8E00A5D642 /* ViewController.m */,
+				B8603B4F1BC6BFB500A5D642 /* myDrawView.h */,
+				B8603B501BC6BFB500A5D642 /* myDrawView.m */,
+				B8603B411BC6BB8E00A5D642 /* Main.storyboard */,
+				B8603B441BC6BB8E00A5D642 /* Assets.xcassets */,
+				B8603B461BC6BB8E00A5D642 /* LaunchScreen.storyboard */,
+				B8603B491BC6BB8E00A5D642 /* Info.plist */,
+				B8603B381BC6BB8E00A5D642 /* Supporting Files */,
+			);
+			path = DrawAndSend;
+			sourceTree = "<group>";
+		};
+		B8603B381BC6BB8E00A5D642 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B8603B391BC6BB8E00A5D642 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B8603B341BC6BB8D00A5D642 /* DrawAndSend */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B8603B4C1BC6BB8E00A5D642 /* Build configuration list for PBXNativeTarget "DrawAndSend" */;
+			buildPhases = (
+				1D9FC47C51D16476F7AFDB0E /* Check Pods Manifest.lock */,
+				B8603B311BC6BB8D00A5D642 /* Sources */,
+				B8603B321BC6BB8D00A5D642 /* Frameworks */,
+				B8603B331BC6BB8D00A5D642 /* Resources */,
+				1AF9BF5ACED40270FBD26AF7 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DrawAndSend;
+			productName = DrawAndSend;
+			productReference = B8603B351BC6BB8D00A5D642 /* DrawAndSend.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B8603B2D1BC6BB8D00A5D642 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Venkata Maniteja";
+				TargetAttributes = {
+					B8603B341BC6BB8D00A5D642 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
+			};
+			buildConfigurationList = B8603B301BC6BB8D00A5D642 /* Build configuration list for PBXProject "DrawAndSend" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B8603B2C1BC6BB8D00A5D642;
+			productRefGroup = B8603B361BC6BB8D00A5D642 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B8603B341BC6BB8D00A5D642 /* DrawAndSend */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B8603B331BC6BB8D00A5D642 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8603B481BC6BB8E00A5D642 /* LaunchScreen.storyboard in Resources */,
+				B8603B451BC6BB8E00A5D642 /* Assets.xcassets in Resources */,
+				B8603B431BC6BB8E00A5D642 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AF9BF5ACED40270FBD26AF7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DrawAndSend/Pods-DrawAndSend-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1D9FC47C51D16476F7AFDB0E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B8603B311BC6BB8D00A5D642 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8603B401BC6BB8E00A5D642 /* ViewController.m in Sources */,
+				B8603B3D1BC6BB8E00A5D642 /* AppDelegate.m in Sources */,
+				B8603B511BC6BFB500A5D642 /* myDrawView.m in Sources */,
+				B8603B3A1BC6BB8E00A5D642 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B8603B411BC6BB8E00A5D642 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B8603B421BC6BB8E00A5D642 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B8603B461BC6BB8E00A5D642 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B8603B471BC6BB8E00A5D642 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B8603B4A1BC6BB8E00A5D642 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B8603B4B1BC6BB8E00A5D642 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B8603B4D1BC6BB8E00A5D642 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E550CE5DA5009B7E24EEE1CA /* Pods-DrawAndSend.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DrawAndSend/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = VenkataManiteja.DrawAndSend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B8603B4E1BC6BB8E00A5D642 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F06B2C41F2A77673E3E1F09F /* Pods-DrawAndSend.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DrawAndSend/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = VenkataManiteja.DrawAndSend;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B8603B301BC6BB8D00A5D642 /* Build configuration list for PBXProject "DrawAndSend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8603B4A1BC6BB8E00A5D642 /* Debug */,
+				B8603B4B1BC6BB8E00A5D642 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B8603B4C1BC6BB8E00A5D642 /* Build configuration list for PBXNativeTarget "DrawAndSend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8603B4D1BC6BB8E00A5D642 /* Debug */,
+				B8603B4E1BC6BB8E00A5D642 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B8603B2D1BC6BB8D00A5D642 /* Project object */;
+}
