@@ -49,6 +49,8 @@
 @synthesize img,imgView;
 
 - (void)viewDidLoad {
+    
+    NSLog(@"test");
     [super viewDidLoad];
     
     img=[[NSMutableArray alloc]init];
