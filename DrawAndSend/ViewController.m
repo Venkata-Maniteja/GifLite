@@ -66,7 +66,25 @@
     
     
     [button setFrame:CGRectMake(0, 20, button.frame.size.width, button.frame.size.height)];
+    
+   
     [self.view addSubview:button];
+                              
+                              
+    NSDictionary * buttonDic = NSDictionaryOfVariableBindings(button);
+                              button.translatesAutoresizingMaskIntoConstraints = NO;
+                              
+        NSArray * hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-160-[button(40)]|"
+                                                                                               options:0
+                                                                                               metrics:nil
+                                                                                                 views:buttonDic];
+     [self.view addConstraints:hConstraints];
+                              
+      NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[button(40)]|"
+                                                                                               options:0
+                                                                                               metrics:nil
+                                                                                                 views:buttonDic];
+ [self.view addConstraints:vConstraints];
    
     
 }
