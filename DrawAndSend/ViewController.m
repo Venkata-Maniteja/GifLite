@@ -74,7 +74,7 @@
     NSDictionary * buttonDic = NSDictionaryOfVariableBindings(button);
                               button.translatesAutoresizingMaskIntoConstraints = NO;
                               
-        NSArray * hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-160-[button(40)]|"
+        NSArray * hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[button(40)]|"
                                                                                                options:0
                                                                                                metrics:nil
                                                                                                  views:buttonDic];
@@ -153,7 +153,7 @@
 
 -(void)stop{
     
-    NSLog(@"timer invalidate");
+    NSLog(@"timer invalidate, and objects count is %d",img.count);
     
     [self changeButtonTitle:@"Save"];
     
@@ -195,11 +195,18 @@
 
 -(IBAction)clear:(id)sender{
     
+    
+    
      [img removeAllObjects];
     
+    NSLog(@"objects cleared, and objects count is %d",img.count);
+    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self.drawView erase];
+        
+        [self changeButtonTitle:@"Record"];
         
         [imgView stopAnimating];
     });
@@ -247,8 +254,53 @@
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    [img addObject:viewImage];
+    NSData *imageData = UIImageJPEGRepresentation(viewImage, 0.0f);
+    NSLog(@"before image details %lu",(unsigned long)[imageData length]);
     
+    //[self normalResImageForAsset:viewImage];
+    
+    [img addObject:[self normalResImageForAsset:viewImage]];
+    
+}
+
+
+- (UIImage *)normalResImageForAsset:(UIImage *)imageToReSize
+{
+    // Convert ALAsset to UIImage
+    UIImage *image = imageToReSize;
+    
+    // Determine output size
+    CGFloat maxSize = 512.0f;
+    CGFloat width = image.size.width;
+    CGFloat height = image.size.height;
+    CGFloat newWidth = width;
+    CGFloat newHeight = height;
+    
+    // If any side exceeds the maximun size, reduce the greater side to 1200px and proportionately the other one
+// .   if (width > maxSize || height > maxSize) {
+        if (width > height) {
+            newWidth = maxSize;
+            newHeight = (height*maxSize)/width;
+        } else {
+            newHeight = maxSize;
+            newWidth = (width*maxSize)/height;
+        }
+//    }
+
+    // Resize the image
+    CGSize newSize = CGSizeMake(newWidth, newHeight);
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Set maximun compression in order to decrease file size and enable faster uploads & downloads
+    NSData *imageData = UIImageJPEGRepresentation(newImage, 0.0f);
+    UIImage *processedImage = [UIImage imageWithData:imageData];
+    
+    NSLog(@"after image details %lu",(unsigned long)[imageData length]);
+    
+    return processedImage;
 }
 
 
