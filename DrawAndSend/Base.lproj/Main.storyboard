@@ -127,9 +127,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="button" destination="Di9-Fw-YDY" id="eZ1-7P-q2k"/>
                         <outlet property="drawView" destination="qts-fh-jFp" id="UXV-RL-cv9"/>
-                        <outlet property="imgView" destination="uFS-jd-lZH" id="hQV-nM-Dgw"/>
                         <outlet property="loginButton" destination="ZYD-Fg-PML" id="TSM-6V-4vb"/>
                     </connections>
                 </viewController>
