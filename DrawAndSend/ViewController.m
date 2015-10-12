@@ -21,39 +21,18 @@
 @interface ViewController ()<FCColorPickerViewControllerDelegate,MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate,FBSDKSharingDelegate>
 
 @property (nonatomic,strong) IBOutlet myDrawView *drawView;
-
-@property (nonatomic,strong) NSTimer *timer;
-
-@property (nonatomic,strong) IBOutlet UIImageView *imgView;
-
-@property (nonatomic,strong) NSMutableArray *img;
-
 @property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
-
 @property (nonatomic, strong) IBOutlet FBSDKLoginButton *loginButton;
-
-
-@property (nonatomic,strong) IBOutlet UIButton *button;
-
-
-
-
-
-
-
 
 @end
 
 @implementation ViewController
-
-@synthesize img,imgView;
 
 - (void)viewDidLoad {
     
     NSLog(@"test");
     [super viewDidLoad];
     
-    img=[[NSMutableArray alloc]init];
     
     [self setNeedsStatusBarAppearanceUpdate];
    
@@ -105,24 +84,7 @@
     
 }
 
--(void)removeFile{
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"animated.gif"];
-    NSError *error;
-    BOOL success = [fileManager removeItemAtPath:filePath error:&error];
-    if (success) {
-//        UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-//        [removeSuccessFulAlert show];
-        NSLog(@"succss in removing");
-    }
-    else
-    {
-        NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
-    }
-}
+
 
 -(void)viewDidAppear:(BOOL)animated{
     
@@ -134,31 +96,14 @@
     
     [self.drawView erase];
     
-    [img removeAllObjects];
     NSLog(@"objects removed from array");
     
-    [self changeButtonTitle:@"Record"];
-
     
-    imgView.hidden=YES;
-    
-    [self removeFile];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
--(void)stop{
-    
-    NSLog(@"timer invalidate, and objects count is %d",img.count);
-    
-    [self changeButtonTitle:@"Save"];
-    
-    [self.timer invalidate];
-
 }
 
 -(IBAction)email:(id)sender{
@@ -196,126 +141,12 @@
 -(IBAction)clear:(id)sender{
     
     
-    
-     [img removeAllObjects];
-    
-    NSLog(@"objects cleared, and objects count is %d",img.count);
-    
-
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self.drawView erase];
         
-        [self changeButtonTitle:@"Record"];
-        
-        [imgView stopAnimating];
-    });
+        });
     
-   
-    
-}
-
-
--(void)record{
-    
-    [self changeButtonTitle:@"Stop"];
-    [self recordScreen];
-   
-}
-
--(void)changeButtonTitle:(NSString *)title{
-    
-    [self.button setTitle:title forState:UIControlStateNormal];
-}
-
--(void)play{
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        imgView.hidden=NO;
-        
-        imgView.animationImages = img;
-        imgView.animationDuration = 2.0f;
-        imgView.animationRepeatCount = 2;
-        [imgView startAnimating];
-        
-        [self changeButtonTitle:@"Record"];
-        
-    });
-    
-    
-}
-
--(void)takeSnapShot{
-    
-    //capture the screenshot of the uiimageview and save it in camera roll
-    UIGraphicsBeginImageContext(self.drawView.frame.size);
-    [self.drawView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    NSData *imageData = UIImageJPEGRepresentation(viewImage, 0.0f);
-    NSLog(@"before image details %lu",(unsigned long)[imageData length]);
-    
-    //[self normalResImageForAsset:viewImage];
-    
-    [img addObject:[self normalResImageForAsset:viewImage]];
-    
-}
-
-
-- (UIImage *)normalResImageForAsset:(UIImage *)imageToReSize
-{
-    // Convert ALAsset to UIImage
-    UIImage *image = imageToReSize;
-    
-    // Determine output size
-    CGFloat maxSize = 512.0f;
-    CGFloat width = image.size.width;
-    CGFloat height = image.size.height;
-    CGFloat newWidth = width;
-    CGFloat newHeight = height;
-    
-    // If any side exceeds the maximun size, reduce the greater side to 1200px and proportionately the other one
-// .   if (width > maxSize || height > maxSize) {
-        if (width > height) {
-            newWidth = maxSize;
-            newHeight = (height*maxSize)/width;
-        } else {
-            newHeight = maxSize;
-            newWidth = (width*maxSize)/height;
-        }
-//    }
-
-    // Resize the image
-    CGSize newSize = CGSizeMake(newWidth, newHeight);
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    // Set maximun compression in order to decrease file size and enable faster uploads & downloads
-    NSData *imageData = UIImageJPEGRepresentation(newImage, 0.0f);
-    UIImage *processedImage = [UIImage imageWithData:imageData];
-    
-    NSLog(@"after image details %lu",(unsigned long)[imageData length]);
-    
-    return processedImage;
-}
-
-
-
--(void)save{
-    
-    
-    [self removeFile];
-    [self changeButtonTitle:@"Play"];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        //        [self makeAnimatedGif:viewImage];
-               [self makeAnimatedGif];
-        
-    });
 }
 
 -(IBAction)color:(id)sender{
@@ -329,40 +160,6 @@
     
 }
 
-
--(IBAction)button:(id)sender{
-    
-    
-    if ([[sender currentTitle] isEqualToString:@"Record"]) {
-        
-        [self record];
-        
-    }
-    
-    else if ([[sender currentTitle] isEqualToString:@"Stop"]) {
-        
-        [self stop];
-        
-    }
-    
-    else if ([[sender currentTitle] isEqualToString:@"Save"]) {
-        
-        [self save];
-        
-    }
-    
-    else if ([[sender currentTitle] isEqualToString:@"Play"]) {
-        
-        [self play];
-        
-    }
-    
-    
-    
-}
-
-
-
 #pragma mark - FCColorPickerViewControllerDelegate Methods
 
 -(void)colorPickerViewController:(FCColorPickerViewController *)colorPicker didSelectColor:(UIColor *)color {
@@ -375,47 +172,6 @@
 }
 
 
--(void)makeAnimatedGif {
-     NSUInteger kFrameCount = img.count;
-    
-    NSDictionary *fileProperties = @{
-                                     (__bridge id)kCGImagePropertyGIFDictionary: @{
-                                             (__bridge id)kCGImagePropertyGIFLoopCount: @0, // 0 means loop forever
-                                             }
-                                     };
-    
-    NSDictionary *frameProperties = @{
-                                      (__bridge id)kCGImagePropertyGIFDictionary: @{
-                                              (__bridge id)kCGImagePropertyGIFDelayTime: @0.08f, // a float (not double!) in seconds, rounded to centiseconds in the GIF data
-                                              }
-                                      };
-    
-    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-    NSURL *fileURL = [documentsDirectoryURL URLByAppendingPathComponent:@"animated.gif"];
-    
-    CGImageDestinationRef destination = CGImageDestinationCreateWithURL((__bridge CFURLRef)fileURL, kUTTypeGIF, kFrameCount, NULL);
-    CGImageDestinationSetProperties(destination, (__bridge CFDictionaryRef)fileProperties);
-    
-    for (NSUInteger i = 0; i < kFrameCount; i++) {
-        @autoreleasepool {
-            UIImage *image =[img objectAtIndex:i];
-            CGImageDestinationAddImage(destination, image.CGImage, (__bridge CFDictionaryRef)frameProperties);
-        }
-    }
-    
-    if (!CGImageDestinationFinalize(destination)) {
-        NSLog(@"failed to finalize image destination");
-    }
-    CFRelease(destination);
-    
-    NSLog(@"url=%@", fileURL);
-}
-
--(void)recordScreen{
-    
-   self.timer= [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(takeSnapShot) userInfo:nil repeats:YES];
-
-}
 
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
