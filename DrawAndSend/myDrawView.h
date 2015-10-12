@@ -11,8 +11,13 @@
 @interface myDrawView : UIView
 
 
+@property (nonatomic,strong) UIBezierPath *path;
 @property (nonatomic,strong) UIColor *lineColor;
 @property (nonatomic,assign) NSUInteger lineWidth;
+@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,strong) NSMutableArray *img;
+
+
 -(void)erase;
 
 @end

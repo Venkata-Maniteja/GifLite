@@ -10,18 +10,19 @@
 
 @implementation myDrawView
 
-{
-    UIBezierPath *path;
-}
+@synthesize img;
 
 - (id)initWithCoder:(NSCoder *)aDecoder // (1)
 {
     if (self = [super initWithCoder:aDecoder])
     {
-        [self setMultipleTouchEnabled:NO]; // (2)
+        //[self setMultipleTouchEnabled:NO]; // (2)
+        [self setUserInteractionEnabled:YES];
+        
+        img=[[NSMutableArray alloc]init];
         [self setBackgroundColor:[UIColor whiteColor]];
-        path = [UIBezierPath bezierPath];
-        [path setLineWidth:self.lineWidth];
+        self.path = [UIBezierPath bezierPath];
+        [self.path setLineWidth:self.lineWidth];
     }
     return self;
 }
@@ -29,13 +30,14 @@
 - (void)drawRect:(CGRect)rect // (5)
 {
     [self.lineColor setStroke];
-    [path stroke];
+    [self.path stroke];
 }
 
 - (void)erase {
-    path   = nil;  //Set current path nil
-    path   = [UIBezierPath bezierPath]; //Create new path
-    [path setLineWidth:self.lineWidth];
+    self.path   = nil;  //Set current path nil
+    self.path   = [UIBezierPath bezierPath]; //Create new path
+    [self.path setLineWidth:self.lineWidth];
+    
     [self setNeedsDisplay];
 }
 
@@ -43,14 +45,16 @@
 {
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self];
-    [path moveToPoint:p];
+    [self.path moveToPoint:p];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [self recordScreen];
+    
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self];
-    [path addLineToPoint:p]; // (4)
+    [self.path addLineToPoint:p]; // (4)
     [self setNeedsDisplay];
 }
 
@@ -62,6 +66,29 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self touchesEnded:touches withEvent:event];
+}
+
+-(void)recordScreen{
+    
+        self.timer= [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(takeSnapShot) userInfo:nil repeats:YES];
+    
+}
+
+-(void)takeSnapShot{
+    
+    //capture the screenshot of the uiimageview and save it in camera roll
+    UIGraphicsBeginImageContext(self.frame.size);
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    NSData *imageData = UIImageJPEGRepresentation(viewImage, 0.0f);
+    NSLog(@"before image details %lu",(unsigned long)[imageData length]);
+    
+    //[self normalResImageForAsset:viewImage];
+    
+    [img addObject:viewImage];
+    
 }
 
 @end
