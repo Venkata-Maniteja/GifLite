@@ -30,10 +30,44 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect // (5)
+- (void)drawRect:(CGRect)frame // (5)
 {
     [self.lineColor setStroke];
     [self.path stroke];
+    
+  
+ //   [self shadow];
+    
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //// Color Declarations
+    UIColor* color = [UIColor colorWithRed: 0.363 green: 0.718 blue: 0 alpha: 1];
+    UIColor* shadowColor = [UIColor colorWithRed: 0.247 green: 0.828 blue: 0.099 alpha: 1];
+    
+    //// Shadow Declarations
+    NSShadow* shadow = [[NSShadow alloc] init];
+    [shadow setShadowColor: shadowColor];
+    [shadow setShadowOffset: CGSizeMake(-1.1, -1.1)];
+    [shadow setShadowBlurRadius: 21];
+    
+    //// Rectangle Drawing
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(frame), CGRectGetMinY(frame), 66.2, 248)];
+    CGContextSaveGState(context);
+    CGContextSetShadowWithColor(context, shadow.shadowOffset, shadow.shadowBlurRadius, [shadow.shadowColor CGColor]);
+    [color setStroke];
+    rectanglePath.lineWidth = 2;
+    [rectanglePath stroke];
+    CGContextRestoreGState(context);
+}
+
+
+-(void)shadow{
+    
+    self.layer.masksToBounds = NO;
+    self.layer.shadowOffset = CGSizeMake(-15, 20);
+    self.layer.shadowRadius = 5;
+    self.layer.shadowOpacity = 0.5;
 }
 
 - (void)erase {
@@ -48,7 +82,7 @@
 {
     
     [self recordScreen];
-    
+  //  [self borderAnimations];
     dispatch_async(dispatch_get_main_queue(), ^{
         UITouch *touch = [touches anyObject];
         CGPoint p = [touch locationInView:self];
@@ -78,6 +112,33 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self touchesEnded:touches withEvent:event];
+}
+
+
+-(void)borderAnimations{
+    
+    CABasicAnimation *color = [CABasicAnimation animationWithKeyPath:@"borderColor"];
+    // animate from red to blue border ...
+    color.fromValue = (id)[UIColor redColor].CGColor;
+    color.toValue   = (id)[UIColor blueColor].CGColor;
+    // ... and change the model value
+    self.layer.backgroundColor = [UIColor blueColor].CGColor;
+    
+    CABasicAnimation *width = [CABasicAnimation animationWithKeyPath:@"borderWidth"];
+    // animate from 2pt to 4pt wide border ...
+    width.fromValue = @2;
+    width.toValue   = @8;
+    // ... and change the model value
+    self.layer.borderWidth = 4;
+    
+    CAAnimationGroup *both = [CAAnimationGroup animation];
+    // animate both as a group with the duration of 0.5 seconds
+    both.duration   = 9.5;
+    both.animations = @[color, width];
+    // optionally add other configuration (that applies to both animations)
+    both.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    
+    [self.layer addAnimation:both forKey:@"color and width"];
 }
 
 -(void)save{
