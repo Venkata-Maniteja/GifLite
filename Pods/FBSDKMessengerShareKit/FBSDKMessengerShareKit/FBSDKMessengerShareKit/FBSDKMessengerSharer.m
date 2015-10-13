@@ -26,6 +26,7 @@
 #import "FBSDKMessengerURLHandlerReplyContext.h"
 #import "FBSDKMessengerUtils.h"
 
+
 // This SDK version, which is synchronized with Messenger. This is incremented with every SDK release
 static NSString *const kFBSDKMessengerShareKitSendVersion = @"20150714";
 // URLs to talk to messenger
@@ -131,6 +132,11 @@ static NSString *URLSchemeForVersion(NSString *version)
   }
   if (!openURLDidSucceed) {
     [[FBSDKMessengerInstallMessengerAlertPresenter sharedInstance] presentInstallMessengerAlert];
+  }else{
+      
+      NSLog(@"messenger opened");
+      [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"messenger"];
+      
   }
 }
 

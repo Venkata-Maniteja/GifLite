@@ -106,9 +106,9 @@
     _backgroundColor = [backgroundColor copy];
     if (viewIsLoaded) {
         if (_backgroundColor != nil) {
-            self.view.backgroundColor = _backgroundColor;
+            self.view.backgroundColor =  _backgroundColor;
         } else {
-            self.view.backgroundColor = [[UIDevice currentDevice] userInterfaceIdiom]==UIUserInterfaceIdiomPhone?[UIColor darkGrayColor]:[UIColor clearColor];
+            self.view.backgroundColor = [[UIDevice currentDevice] userInterfaceIdiom]==UIUserInterfaceIdiomPhone?[UIColor whiteColor]:[UIColor clearColor];
         }
     }
 }

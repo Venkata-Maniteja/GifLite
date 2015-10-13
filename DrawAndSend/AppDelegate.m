@@ -14,6 +14,9 @@
 
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
+#import "myDrawView.h"
+#import "ViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -25,10 +28,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
    
-     [UIApplication sharedApplication].statusBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-
     
     [FBSDKLikeControl class];
     [FBSDKLoginButton class];
@@ -70,6 +69,22 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    
+    BOOL messenger=[[NSUserDefaults standardUserDefaults]boolForKey:@"messenger"];
+    
+    if (messenger) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        ViewController* mainController = (ViewController *)  self.window.rootViewController;
+            
+            [mainController.drawView erase];
+            
+        });
+        
+    }
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

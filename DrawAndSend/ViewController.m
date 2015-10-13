@@ -7,41 +7,30 @@
 //
 
 #import "ViewController.h"
-#import "myDrawView.h"
-#import <ImageIO/ImageIO.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <FCColorPickerViewController.h>
-#import <MessageUI/MessageUI.h>
-#import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-
-#import <FBSDKShareKit/FBSDKShareKit.h>
 
 
 @interface ViewController ()<FCColorPickerViewControllerDelegate,MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate,FBSDKSharingDelegate>
-
-@property (nonatomic,strong) IBOutlet myDrawView *drawView;
-@property (nonatomic,strong) IBOutlet UIView *buttonHolder;
-@property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
-@property (nonatomic, strong) IBOutlet FBSDKLoginButton *loginButton;
 
 @end
 
 @implementation ViewController
 
+@synthesize button,viewDidAppear,timerLabel;
 - (void)viewDidLoad {
     
     NSLog(@"test");
     [super viewDidLoad];
     
-    [self performSelector:@selector(runOnlyOneTime) withObject:nil afterDelay:3.0];
+    viewDidAppear=NO;
+    
+    [self performSelector:@selector(runOnlyOneTime) withObject:nil afterDelay:2.0];
     
     [self setNeedsStatusBarAppearanceUpdate];
    
     self.loginButton.publishPermissions = @[@"publish_actions"];
     
     CGFloat buttonWidth = 34;
-    UIButton *button = [FBSDKMessengerShareButton circularButtonWithStyle:FBSDKMessengerShareButtonStyleBlue
+    button = [FBSDKMessengerShareButton circularButtonWithStyle:FBSDKMessengerShareButtonStyleBlue
                                                                     width:buttonWidth];
     [button addTarget:self action:@selector(shareButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
@@ -50,23 +39,77 @@
     
    
     [self.view addSubview:button];
+    
+    button.enabled=YES;
                               
-                              
-    NSDictionary * buttonDic = NSDictionaryOfVariableBindings(button);
-                              button.translatesAutoresizingMaskIntoConstraints = NO;
-                              
-        NSArray * hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-100-[button(34)]|"
-                                                                                               options:0
-                                                                                               metrics:nil
-                                                                                                 views:buttonDic];
-     [self.view addConstraints:hConstraints];
-                              
-      NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[button(34)]|"
-                                                                                               options:0
-                                                                                               metrics:nil
-                                                                                                 views:buttonDic];
- [self.view addConstraints:vConstraints];
+    
+    [self applyConstraintsForShareButton];
+    
+    
    
+    
+}
+
+-(void)applyConstraintsForShareButton{
+    
+    NSDictionary * buttonDic = NSDictionaryOfVariableBindings(button);
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    NSArray * hConstraints ;
+    
+    if (screenRect.size.width == 568)
+    {
+        // this is an iPhone 5
+        
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-160-[button(34)]|"
+                                                               options:0
+                                                               metrics:nil
+                                                                 views:buttonDic];
+    }
+    
+    if (screenRect.size.width == 667)
+    {
+        // this is an iPhone 6
+        
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-220-[button(34)]|"
+                                                               options:0
+                                                               metrics:nil
+                                                                 views:buttonDic];
+    }
+    
+    if (screenRect.size.width == 736)
+    {
+        // this is an iPhone 6 +
+        
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-260-[button(34)]|"
+                                                               options:0
+                                                               metrics:nil
+                                                                 views:buttonDic];
+    }
+    if (screenRect.size.width == 480)
+    {
+        // this is an iPhone 4
+        
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-120-[button(34)]|"
+                                                               options:0
+                                                               metrics:nil
+                                                                 views:buttonDic];
+    }
+    
+    [self.view addConstraints:hConstraints];
+    
+    NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[button(34)]|"
+                                                                     options:0
+                                                                     metrics:nil
+                                                                       views:buttonDic];
+    
+    
+    
+    [self.view addConstraints:vConstraints];
+    
     
 }
 
@@ -98,6 +141,46 @@
     
     [super viewDidAppear:animated];
     
+    if (!viewDidAppear) {
+        
+        viewDidAppear=YES;
+        
+        timerLabel.center=self.drawView.center;
+        
+        timerLabel.text=@"3";
+        
+        timerLabel.alpha = 1;
+        
+        [self.drawView addSubview:timerLabel];
+        
+        [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             timerLabel.alpha = 0;
+                         }
+                         completion:^(BOOL finished) {
+                             timerLabel.alpha = 1;
+                             [UIView animateWithDuration:1.0 animations:^{
+                                 timerLabel.alpha = 0;
+                                 timerLabel.text = @"2";
+                             } completion:^(BOOL finished) {
+                                 
+                                 timerLabel.alpha = 1;
+                                 
+                                 [UIView animateWithDuration:1.0 animations:^{
+                                     timerLabel.alpha = 0;
+                                     timerLabel.text = @"1";
+                                 } completion:^(BOOL finished) {
+                                     [timerLabel removeFromSuperview];
+                                     
+                                 }];
+                                 
+                             }];
+                         }];
+        
+
+    }
+    
+       
     [self performSelector:@selector(expireAlert) withObject:nil afterDelay:10.0];
    
     [self applyMaskForButtonHolder];
@@ -128,6 +211,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
+    
+   
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -161,6 +246,7 @@
                          handler:^(UIAlertAction * action)
                          {
                              [alert dismissViewControllerAnimated:YES completion:nil];
+                             [self performSelector:@selector(expireAlert) withObject:nil afterDelay:10.0];
                              
                          }];
     
@@ -170,6 +256,11 @@
     
     
 
+}
+
+-(void)alterImageViewWithBadges{
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -240,6 +331,7 @@
 
 -(void)colorPickerViewController:(FCColorPickerViewController *)colorPicker didSelectColor:(UIColor *)color {
     self.drawView.lineColor = color;
+    [self.drawView erase];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
