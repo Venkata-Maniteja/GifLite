@@ -36,29 +36,6 @@
     [self.path stroke];
     
   
- //   [self shadow];
-    
-    //// General Declarations
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    //// Color Declarations
-    UIColor* color = [UIColor colorWithRed: 0.363 green: 0.718 blue: 0 alpha: 1];
-    UIColor* shadowColor = [UIColor colorWithRed: 0.247 green: 0.828 blue: 0.099 alpha: 1];
-    
-    //// Shadow Declarations
-    NSShadow* shadow = [[NSShadow alloc] init];
-    [shadow setShadowColor: shadowColor];
-    [shadow setShadowOffset: CGSizeMake(-1.1, -1.1)];
-    [shadow setShadowBlurRadius: 21];
-    
-    //// Rectangle Drawing
-    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(CGRectGetMinX(frame), CGRectGetMinY(frame), 66.2, 248)];
-    CGContextSaveGState(context);
-    CGContextSetShadowWithColor(context, shadow.shadowOffset, shadow.shadowBlurRadius, [shadow.shadowColor CGColor]);
-    [color setStroke];
-    rectanglePath.lineWidth = 2;
-    [rectanglePath stroke];
-    CGContextRestoreGState(context);
 }
 
 
@@ -82,11 +59,14 @@
 {
     
     [self recordScreen];
-  //  [self borderAnimations];
+    
+    [self performSelector:@selector(stop) withObject:nil afterDelay:15.0];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         UITouch *touch = [touches anyObject];
         CGPoint p = [touch locationInView:self];
-        [self.path moveToPoint:p];    });
+        [self.path moveToPoint:p];
+    });
    
 }
 
@@ -117,12 +97,14 @@
 
 -(void)borderAnimations{
     
+    //need to provide a way to animate the border fade in and fadeout, the border must be like sprayed border
+    
     CABasicAnimation *color = [CABasicAnimation animationWithKeyPath:@"borderColor"];
     // animate from red to blue border ...
     color.fromValue = (id)[UIColor redColor].CGColor;
     color.toValue   = (id)[UIColor blueColor].CGColor;
     // ... and change the model value
-    self.layer.backgroundColor = [UIColor blueColor].CGColor;
+  //  self.layer.backgroundColor = [UIColor blueColor].CGColor;
     
     CABasicAnimation *width = [CABasicAnimation animationWithKeyPath:@"borderWidth"];
     // animate from 2pt to 4pt wide border ...
@@ -144,7 +126,6 @@
 -(void)save{
     
     
-    [self removeFile];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //        [self makeAnimatedGif:viewImage];
@@ -176,10 +157,12 @@
 
 -(void)stop{
     
-    NSLog(@"timer invalidate, and objects count is %d",img.count);
+    NSLog(@"timer invalidate, and objects count is %lu",(unsigned long)img.count);
+    
     
     
     [self.timer invalidate];
+    
     
 }
 
@@ -240,7 +223,7 @@
     
     //[self normalResImageForAsset:viewImage];
     
-    [img addObject:viewImage];
+    [img addObject:[self normalResImageForAsset:viewImage]] ;//]viewImage];
     
 }
 

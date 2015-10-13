@@ -19,5 +19,7 @@
 
 
 -(void)erase;
+-(void)stop;
+-(void)recordScreen;
 
 @end

@@ -21,6 +21,7 @@
 @interface ViewController ()<FCColorPickerViewControllerDelegate,MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate,FBSDKSharingDelegate>
 
 @property (nonatomic,strong) IBOutlet myDrawView *drawView;
+@property (nonatomic,strong) IBOutlet UIView *buttonHolder;
 @property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, strong) IBOutlet FBSDKLoginButton *loginButton;
 
@@ -33,12 +34,13 @@
     NSLog(@"test");
     [super viewDidLoad];
     
+    [self performSelector:@selector(runOnlyOneTime) withObject:nil afterDelay:3.0];
     
     [self setNeedsStatusBarAppearanceUpdate];
    
     self.loginButton.publishPermissions = @[@"publish_actions"];
     
-    CGFloat buttonWidth = 50;
+    CGFloat buttonWidth = 34;
     UIButton *button = [FBSDKMessengerShareButton circularButtonWithStyle:FBSDKMessengerShareButtonStyleBlue
                                                                     width:buttonWidth];
     [button addTarget:self action:@selector(shareButtonPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -53,13 +55,13 @@
     NSDictionary * buttonDic = NSDictionaryOfVariableBindings(button);
                               button.translatesAutoresizingMaskIntoConstraints = NO;
                               
-        NSArray * hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-80-[button(40)]|"
+        NSArray * hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-100-[button(34)]|"
                                                                                                options:0
                                                                                                metrics:nil
                                                                                                  views:buttonDic];
      [self.view addConstraints:hConstraints];
                               
-      NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[button(40)]|"
+      NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-18-[button(34)]|"
                                                                                                options:0
                                                                                                metrics:nil
                                                                                                  views:buttonDic];
@@ -72,7 +74,13 @@
     return NO;
 }
 
+
 -(void)shareButtonPressed{
+    
+    
+    [self.drawView clearsContextBeforeDrawing];
+    [self.drawView.img removeAllObjects];
+    
     
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
@@ -90,20 +98,86 @@
     
     [super viewDidAppear:animated];
     
-    self.drawView.lineColor=[UIColor blackColor];
-    self.drawView.lineWidth=6.0;
-    [self.drawView setNeedsDisplay];
-    
-    [self.drawView erase];
+    [self performSelector:@selector(expireAlert) withObject:nil afterDelay:10.0];
+   
+    [self applyMaskForButtonHolder];
     
     NSLog(@"objects removed from array");
     
     
 }
 
+-(void)applyMaskForButtonHolder{
+    
+    self.buttonHolder.layer.cornerRadius=10.0;
+    
+}
+
+-(void)runOnlyOneTime{
+    
+    //after i chose the color, this again called on viewdidappear,so im calling this in viewdidload after a delay,so it doesnt get called on viewdidappear
+    
+    
+    self.drawView.lineColor=[UIColor blackColor];
+    self.drawView.lineWidth=6.0;
+    [self.drawView setNeedsDisplay];
+    
+    [self.drawView erase];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+}
+
+-(void)viewDidLayoutSubviews{
+    
+    NSLog(@"view did layout subviews");
+}
+
+
+-(void)expireAlert{
+    
+    [self.drawView stop];
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Trail period ends"
+                                  message:@"please purchase the app"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                             
+                         }];
+    
+    [alert addAction:ok];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [self.drawView stop];
+    
+    
 }
 
 -(IBAction)email:(id)sender{
@@ -140,6 +214,8 @@
 
 -(IBAction)clear:(id)sender{
     
+    
+    [self performSelector:@selector(expireAlert) withObject:nil afterDelay:10.0];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         
