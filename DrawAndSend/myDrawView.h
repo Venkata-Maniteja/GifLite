@@ -17,7 +17,6 @@
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) NSMutableArray *img;
 
-
 -(void)erase;
 -(void)stop;
 -(void)recordScreen;

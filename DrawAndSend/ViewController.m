@@ -25,22 +25,24 @@
     
     [self performSelector:@selector(runOnlyOneTime) withObject:nil afterDelay:2.0];
     
+    
+    //trying to add timer to enable the share button
+ 
     [self setNeedsStatusBarAppearanceUpdate];
    
     self.loginButton.publishPermissions = @[@"publish_actions"];
     
-    CGFloat buttonWidth = 34;
-    button = [FBSDKMessengerShareButton circularButtonWithStyle:FBSDKMessengerShareButtonStyleBlue
+    CGFloat buttonWidth = 40;
+    button = [FBSDKMessengerShareButton circularButtonWithStyle:FBSDKMessengerShareButtonStyleWhite
                                                                     width:buttonWidth];
     [button addTarget:self action:@selector(shareButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [button setFrame:CGRectMake(0, 20, button.frame.size.width, button.frame.size.height)];
+    [button setFrame:CGRectMake(0, 0, button.frame.size.width, button.frame.size.height)];
     
-   
     [self.view addSubview:button];
     
-    button.enabled=YES;
+    button.enabled=NO;
                               
     
     [self applyConstraintsForShareButton];
@@ -64,7 +66,7 @@
     {
         // this is an iPhone 5
         
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-160-[button(34)]|"
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-160-[button(40)]|"
                                                                options:0
                                                                metrics:nil
                                                                  views:buttonDic];
@@ -74,7 +76,7 @@
     {
         // this is an iPhone 6
         
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-220-[button(34)]|"
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-220-[button(40)]|"
                                                                options:0
                                                                metrics:nil
                                                                  views:buttonDic];
@@ -84,7 +86,7 @@
     {
         // this is an iPhone 6 +
         
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-260-[button(34)]|"
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-260-[button(40)]|"
                                                                options:0
                                                                metrics:nil
                                                                  views:buttonDic];
@@ -93,7 +95,7 @@
     {
         // this is an iPhone 4
         
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-120-[button(34)]|"
+        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-120-[button(40)]|"
                                                                options:0
                                                                metrics:nil
                                                                  views:buttonDic];
@@ -101,7 +103,7 @@
     
     [self.view addConstraints:hConstraints];
     
-    NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[button(34)]|"
+    NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[button(40)]|"
                                                                      options:0
                                                                      metrics:nil
                                                                        views:buttonDic];
@@ -132,6 +134,27 @@
     
     
     [FBSDKMessengerSharer shareAnimatedGIF:myData withOptions:nil];
+    
+}
+
+-(void)checkForShareEnableButton{
+    
+    BOOL saved=[[NSUserDefaults standardUserDefaults]boolForKey:@"saved"];
+    
+    if (saved) {
+        
+        //there is a file
+        button.enabled=YES;
+        [button setAlpha:1.0];
+        
+        
+        
+    }else{
+        
+        button.enabled=NO;
+        [button setAlpha:0.3];
+        
+    }
     
 }
 
@@ -200,6 +223,7 @@
     
     //after i chose the color, this again called on viewdidappear,so im calling this in viewdidload after a delay,so it doesnt get called on viewdidappear
     
+     self.timerShareButton=  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(checkForShareEnableButton) userInfo:nil repeats:YES];
     
     self.drawView.lineColor=[UIColor blackColor];
     self.drawView.lineWidth=6.0;
@@ -252,7 +276,7 @@
     
     [alert addAction:ok];
     
-    [self presentViewController:alert animated:YES completion:nil];
+//    [self presentViewController:alert animated:YES completion:nil];
     
     
 

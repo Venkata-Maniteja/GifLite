@@ -25,6 +25,7 @@
 @property (strong, nonatomic) UIDocumentInteractionController *documentInteractionController;
 @property (nonatomic, strong) IBOutlet FBSDKLoginButton *loginButton;
 @property (nonatomic,strong) IBOutlet UILabel *timerLabel;
+@property (nonatomic,strong) NSTimer *timerShareButton;
 
 @property (strong,nonatomic) UIButton *button;
 

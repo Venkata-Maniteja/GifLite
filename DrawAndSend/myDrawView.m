@@ -13,31 +13,54 @@
 
 @implementation myDrawView
 
-@synthesize img;
+{
+    UIImage *incrementalImage;
+    CGPoint pts[5]; // we now need to keep track of the four points of a Bezier segment and the first control point of the next segment
+    uint ctr;
+}
+
+
+@synthesize img,path,lineColor;
 
 - (id)initWithCoder:(NSCoder *)aDecoder // (1)
 {
     if (self = [super initWithCoder:aDecoder])
     {
-        //[self setMultipleTouchEnabled:NO]; // (2)
+        [self setMultipleTouchEnabled:NO];
         [self setUserInteractionEnabled:YES];
         
         img=[[NSMutableArray alloc]init];
         [self setBackgroundColor:[UIColor whiteColor]];
-        self.path = [UIBezierPath bezierPath];
-        [self.path setLineWidth:self.lineWidth];
+        path = [UIBezierPath bezierPath];
+        [path setLineWidth:self.lineWidth];
     }
     return self;
 }
 
-- (void)drawRect:(CGRect)frame // (5)
+
+- (id)initWithFrame:(CGRect)frame
 {
-    [self.lineColor setStroke];
-    [self.path stroke];
-    
-  
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setMultipleTouchEnabled:NO];
+        path = [UIBezierPath bezierPath];
+        [path setLineWidth:2.0];
+    }
+    return self;
 }
 
+
+
+
+
+- (void)drawRect:(CGRect)rect // (5)
+{
+    
+    [incrementalImage drawInRect:rect];
+    [lineColor setStroke];
+    [path stroke];
+  
+}
 
 -(void)shadow{
     
@@ -48,9 +71,11 @@
 }
 
 - (void)erase {
-    self.path   = nil;  //Set current path nil
-    self.path   = [UIBezierPath bezierPath]; //Create new path
-    [self.path setLineWidth:self.lineWidth];
+    
+    incrementalImage=nil;
+    path   = nil;  //Set current path nil
+    path   = [UIBezierPath bezierPath]; //Create new path
+    [path setLineWidth:self.lineWidth];
     
     [self setNeedsDisplay];
 }
@@ -63,10 +88,18 @@
     [self performSelector:@selector(stop) withObject:nil afterDelay:15.0];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+//        UITouch *touch = [touches anyObject];
+//        CGPoint p = [touch locationInView:self];
+//        [self.path moveToPoint:p];
+        
+        ctr = 0;
         UITouch *touch = [touches anyObject];
-        CGPoint p = [touch locationInView:self];
-        [self.path moveToPoint:p];
+        pts[0] = [touch locationInView:self];
+        
     });
+    
+    
+
    
 }
 
@@ -75,11 +108,34 @@
     
     
    dispatch_async(dispatch_get_main_queue(), ^{
+//       UITouch *touch = [touches anyObject];
+//       CGPoint p = [touch locationInView:self];
+//       [self.path addLineToPoint:p]; // (4)
+//       [self setNeedsDisplay];
+       
        UITouch *touch = [touches anyObject];
        CGPoint p = [touch locationInView:self];
-       [self.path addLineToPoint:p]; // (4)
-       [self setNeedsDisplay];
+       ctr++;
+       pts[ctr] = p;
+       if (ctr == 4)
+       {
+           pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
+           
+           [path moveToPoint:pts[0]];
+           [path addCurveToPoint:pts[3] controlPoint1:pts[1] controlPoint2:pts[2]]; // add a cubic Bezier from pt[0] to pt[3], with control points pt[1] and pt[2]
+           
+           [self setNeedsDisplay];
+           // replace points and get ready to handle the next segment
+           pts[0] = pts[3];
+           pts[1] = pts[4];
+           ctr = 1;
+       }
+
+       
    });
+    
+    
+    
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -87,6 +143,15 @@
     [self touchesMoved:touches withEvent:event];
     [self stop];
     [self save];
+    
+    [self drawBitmap];
+    [self setNeedsDisplay];
+    
+    //this line removes the drawing
+   // [path removeAllPoints];
+    //ctr = 0;
+    
+    
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -206,6 +271,10 @@
     CFRelease(destination);
     
     NSLog(@"url=%@", fileURL);
+    
+    //enable the share button
+    [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"saved"];
+    
 }
 
 
@@ -266,6 +335,28 @@
     NSLog(@"after image details %lu",(unsigned long)[imageData length]);
     
     return processedImage;
+}
+
+
+- (void)drawBitmap
+{
+   dispatch_async(dispatch_get_main_queue(), ^{
+      
+       
+       UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0.0);
+       
+       if (!incrementalImage) // first time; paint background white
+       {
+           UIBezierPath *rectpath = [UIBezierPath bezierPathWithRect:self.bounds];
+           [[UIColor whiteColor] setFill];
+           [rectpath fill];
+       }
+       [incrementalImage drawAtPoint:CGPointZero];
+       [[UIColor blackColor] setStroke];
+       [path stroke];
+       incrementalImage = UIGraphicsGetImageFromCurrentImageContext();
+       UIGraphicsEndImageContext();
+   });
 }
 
 
