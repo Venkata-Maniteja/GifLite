@@ -10,18 +10,23 @@
 
 
 @interface ViewController ()<FCColorPickerViewControllerDelegate,MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate,FBSDKSharingDelegate>
+@property (strong, nonatomic) UIButton *messengerButton;
+@property (strong, nonatomic) IBOutlet UIView *shareButtonView;
 
 @end
 
 @implementation ViewController
+
 
 @synthesize button,viewDidAppear,timerLabel;
 - (void)viewDidLoad {
     
     NSLog(@"test");
     [super viewDidLoad];
-    
+//    [timerLabel setHidden:YES];
     viewDidAppear=NO;
+    
+    
     
     [self performSelector:@selector(runOnlyOneTime) withObject:nil afterDelay:2.0];
     
@@ -29,94 +34,25 @@
     //trying to add timer to enable the share button
  
     [self setNeedsStatusBarAppearanceUpdate];
-   
+    
     self.loginButton.publishPermissions = @[@"publish_actions"];
     
     CGFloat buttonWidth = 40;
-    button = [FBSDKMessengerShareButton circularButtonWithStyle:FBSDKMessengerShareButtonStyleWhite
+    
+    
+    _messengerButton = [FBSDKMessengerShareButton circularButtonWithStyle:FBSDKMessengerShareButtonStyleWhite
                                                                     width:buttonWidth];
-    [button addTarget:self action:@selector(shareButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [_messengerButton addTarget:self action:@selector(shareButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
+    [self.shareButtonView addSubview:_messengerButton];
     
-    [button setFrame:CGRectMake(0, 0, button.frame.size.width, button.frame.size.height)];
-    
-    [self.view addSubview:button];
-    
-    button.enabled=NO;
-                              
-    
-    [self applyConstraintsForShareButton];
-    
-    
-   
-    
+    _messengerButton.enabled=NO;
 }
 
--(void)applyConstraintsForShareButton{
-    
-    NSDictionary * buttonDic = NSDictionaryOfVariableBindings(button);
-    button.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    
-    NSArray * hConstraints ;
-    
-    if (screenRect.size.width == 568)
-    {
-        // this is an iPhone 5
-        
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-160-[button(40)]|"
-                                                               options:0
-                                                               metrics:nil
-                                                                 views:buttonDic];
-    }
-    
-    if (screenRect.size.width == 667)
-    {
-        // this is an iPhone 6
-        
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-220-[button(40)]|"
-                                                               options:0
-                                                               metrics:nil
-                                                                 views:buttonDic];
-    }
-    
-    if (screenRect.size.width == 736)
-    {
-        // this is an iPhone 6 +
-        
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-260-[button(40)]|"
-                                                               options:0
-                                                               metrics:nil
-                                                                 views:buttonDic];
-    }
-    if (screenRect.size.width == 480)
-    {
-        // this is an iPhone 4
-        
-        hConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-120-[button(40)]|"
-                                                               options:0
-                                                               metrics:nil
-                                                                 views:buttonDic];
-    }
-    
-    [self.view addConstraints:hConstraints];
-    
-    NSArray * vConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[button(40)]|"
-                                                                     options:0
-                                                                     metrics:nil
-                                                                       views:buttonDic];
-    
-    
-    
-    [self.view addConstraints:vConstraints];
-    
-    
-}
+
 
 -(BOOL)prefersStatusBarHidden{
-    return NO;
+    return YES;
 }
 
 
@@ -144,15 +80,15 @@
     if (saved) {
         
         //there is a file
-        button.enabled=YES;
-        [button setAlpha:1.0];
+        _messengerButton.enabled=YES;
+        [_messengerButton setAlpha:1.0];
         
         
         
     }else{
         
-        button.enabled=NO;
-        [button setAlpha:0.3];
+        _messengerButton.enabled=NO;
+        [_messengerButton setAlpha:0.3];
         
     }
     
@@ -167,7 +103,7 @@
     if (!viewDidAppear) {
         
         viewDidAppear=YES;
-        
+
         timerLabel.center=self.drawView.center;
         
         timerLabel.text=@"3";
@@ -175,7 +111,6 @@
         timerLabel.alpha = 1;
         
         [self.drawView addSubview:timerLabel];
-        
         [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
                              timerLabel.alpha = 0;
@@ -200,11 +135,11 @@
                              }];
                          }];
         
-
+        
     }
     
        
-    [self performSelector:@selector(expireAlert) withObject:nil afterDelay:10.0];
+//    [self performSelector:@selector(expireAlert) withObject:nil afterDelay:10.0];
    
     [self applyMaskForButtonHolder];
     

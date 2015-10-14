@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -17,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOf-xR-CUP" userLabel="Button Holder">
-                                <rect key="frame" x="304" y="20" width="128" height="34"/>
+                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="KOf-xR-CUP" userLabel="Button Holder">
+                                <rect key="frame" x="304" y="40" width="128" height="34"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEl-4F-seU">
                                         <rect key="frame" x="15" y="2" width="36" height="30"/>
@@ -50,6 +51,7 @@
                                     <constraint firstItem="CEl-4F-seU" firstAttribute="centerY" secondItem="KOf-xR-CUP" secondAttribute="centerY" id="TjL-TN-MfN"/>
                                     <constraint firstItem="cVJ-ip-CNd" firstAttribute="leading" secondItem="CEl-4F-seU" secondAttribute="trailing" constant="25" id="Us8-so-wnJ"/>
                                     <constraint firstItem="CEl-4F-seU" firstAttribute="leading" secondItem="KOf-xR-CUP" secondAttribute="leading" constant="15" id="oU8-pk-jvJ"/>
+                                    <constraint firstItem="CEl-4F-seU" firstAttribute="top" secondItem="KOf-xR-CUP" secondAttribute="top" constant="2" id="phf-Bo-LnO"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -58,7 +60,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMf-O0-wVS">
-                                <rect key="frame" x="682" y="28" width="22" height="22"/>
+                                <rect key="frame" x="20" y="46" width="22" height="22"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="M2x-jh-MTS"/>
@@ -73,17 +75,17 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qts-fh-jFp" userLabel="Draw VIew" customClass="myDrawView">
-                                <rect key="frame" x="20" y="58" width="696" height="336"/>
+                                <rect key="frame" x="20" y="78" width="696" height="316"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSQ-n0-SNH">
-                                        <rect key="frame" x="260" y="123" width="177" height="90"/>
+                                        <rect key="frame" x="260" y="113" width="177" height="90"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="75"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by GifLite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-Jc-VSd">
-                                        <rect key="frame" x="0.0" y="315" width="194" height="21"/>
+                                        <rect key="frame" x="0.0" y="295" width="194" height="21"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="BjI-2F-7dJ"/>
@@ -103,20 +105,48 @@
                                     <constraint firstItem="pSQ-n0-SNH" firstAttribute="centerY" secondItem="qts-fh-jFp" secondAttribute="centerY" id="sGi-XB-G2Q"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Of9-Of-mRI" userLabel="sharebuttonView">
+                                <rect key="frame" x="662" y="340" width="44" height="44"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Of9-Of-mRI" secondAttribute="height" multiplier="1:1" id="Wn8-59-TBW"/>
+                                    <constraint firstAttribute="width" constant="44" id="fWm-ls-Nfz"/>
+                                    <constraint firstAttribute="height" constant="44" id="hyx-K4-RXU"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Wn8-59-TBW"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qts-fh-jFp" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="EQ3-so-Qfb"/>
-                            <constraint firstItem="KOf-xR-CUP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="F0f-RF-tXL"/>
+                            <constraint firstItem="KOf-xR-CUP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="F0f-RF-tXL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qts-fh-jFp" secondAttribute="bottom" constant="20" id="FRU-mf-NsU"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dMf-O0-wVS" secondAttribute="trailing" constant="12" id="JN0-sh-vZ6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dMf-O0-wVS" secondAttribute="trailing" constant="674" id="JN0-sh-vZ6"/>
                             <constraint firstItem="qts-fh-jFp" firstAttribute="top" secondItem="KOf-xR-CUP" secondAttribute="bottom" constant="4" identifier="drawViewTop" id="JnQ-km-aTH"/>
+                            <constraint firstItem="qts-fh-jFp" firstAttribute="top" secondItem="KOf-xR-CUP" secondAttribute="bottom" constant="4" id="Pim-OF-1qc"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="dMf-O0-wVS" secondAttribute="leading" id="SCj-7N-BbC"/>
                             <constraint firstItem="qts-fh-jFp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" identifier="drawViewTrailing" id="bB6-jn-yCj"/>
-                            <constraint firstItem="dMf-O0-wVS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="hFW-8b-jdZ"/>
+                            <constraint firstItem="dMf-O0-wVS" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="hFW-8b-jdZ"/>
                             <constraint firstItem="qts-fh-jFp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" identifier="drawViewLeading" id="iZI-c6-k4y"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Of9-Of-mRI" secondAttribute="bottom" constant="30" id="kF1-cy-xhX"/>
                             <constraint firstItem="KOf-xR-CUP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mFS-KL-DuG"/>
+                            <constraint firstItem="dMf-O0-wVS" firstAttribute="centerY" secondItem="KOf-xR-CUP" secondAttribute="centerY" id="xOn-Kq-9Sx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Of9-Of-mRI" secondAttribute="trailing" constant="10" id="z2E-Un-cc8"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="JN0-sh-vZ6"/>
+                                <exclude reference="hFW-8b-jdZ"/>
+                                <exclude reference="EQ3-so-Qfb"/>
+                                <exclude reference="JnQ-km-aTH"/>
+                            </mask>
+                        </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="InN-td-gh0"/>
@@ -126,6 +156,7 @@
                     <connections>
                         <outlet property="buttonHolder" destination="KOf-xR-CUP" id="rsx-HJ-MH6"/>
                         <outlet property="drawView" destination="qts-fh-jFp" id="UXV-RL-cv9"/>
+                        <outlet property="shareButtonView" destination="Of9-Of-mRI" id="Zlc-c8-3BO"/>
                         <outlet property="timerLabel" destination="pSQ-n0-SNH" id="bhw-54-9hF"/>
                     </connections>
                 </viewController>

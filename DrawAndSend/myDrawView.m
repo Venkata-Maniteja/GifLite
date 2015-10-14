@@ -73,7 +73,6 @@
     
     [self performSelector:@selector(stop) withObject:nil afterDelay:15.0];
     
-    
         ctr = 0;
         UITouch *touch = [touches anyObject];
         pts[0] = [touch locationInView:self];
@@ -306,7 +305,6 @@
 
 - (void)drawBitmap
 {
-    
        UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0.0);
        
        if (!incrementalImage) // first time; paint background white
