@@ -18,6 +18,7 @@
 		B8603B551BC6C87D00A5D642 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8603B541BC6C87D00A5D642 /* MobileCoreServices.framework */; };
 		B898C4CE1BC80767007616CE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B898C4CD1BC80767007616CE /* MessageUI.framework */; };
 		E028489B9E8321CFD902A433 /* libPods-DrawAndSend.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A986D4C429798EC1E700F16C /* libPods-DrawAndSend.a */; };
+		F752E7A81BCED956008D9148 /* PrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F752E7A71BCED956008D9148 /* PrivacyViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		B898C4D11BC812B4007616CE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-20151007/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		E550CE5DA5009B7E24EEE1CA /* Pods-DrawAndSend.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawAndSend.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrawAndSend/Pods-DrawAndSend.debug.xcconfig"; sourceTree = "<group>"; };
 		F06B2C41F2A77673E3E1F09F /* Pods-DrawAndSend.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawAndSend.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawAndSend/Pods-DrawAndSend.release.xcconfig"; sourceTree = "<group>"; };
+		F752E7A61BCED956008D9148 /* PrivacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyViewController.h; sourceTree = "<group>"; };
+		F752E7A71BCED956008D9148 /* PrivacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				B8603B4F1BC6BFB500A5D642 /* myDrawView.h */,
 				B8603B501BC6BFB500A5D642 /* myDrawView.m */,
 				B8603B411BC6BB8E00A5D642 /* Main.storyboard */,
+				F752E7A61BCED956008D9148 /* PrivacyViewController.h */,
+				F752E7A71BCED956008D9148 /* PrivacyViewController.m */,
 				B8603B441BC6BB8E00A5D642 /* Assets.xcassets */,
 				B8603B461BC6BB8E00A5D642 /* LaunchScreen.storyboard */,
 				B8603B491BC6BB8E00A5D642 /* Info.plist */,
@@ -232,6 +237,7 @@
 				B8603B401BC6BB8E00A5D642 /* ViewController.m in Sources */,
 				B8603B3D1BC6BB8E00A5D642 /* AppDelegate.m in Sources */,
 				B8603B511BC6BFB500A5D642 /* myDrawView.m in Sources */,
+				F752E7A81BCED956008D9148 /* PrivacyViewController.m in Sources */,
 				B8603B3A1BC6BB8E00A5D642 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
