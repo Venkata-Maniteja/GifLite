@@ -340,9 +340,6 @@
 
 - (void)drawBitmap
 {
-   dispatch_async(dispatch_get_main_queue(), ^{
-      
-       
        UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0.0);
        
        if (!incrementalImage) // first time; paint background white
@@ -356,7 +353,6 @@
        [path stroke];
        incrementalImage = UIGraphicsGetImageFromCurrentImageContext();
        UIGraphicsEndImageContext();
-   });
 }
 
 
