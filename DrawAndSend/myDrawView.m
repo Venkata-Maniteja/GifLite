@@ -33,32 +33,18 @@
         [self setBackgroundColor:[UIColor whiteColor]];
         path = [UIBezierPath bezierPath];
         [path setLineWidth:self.lineWidth];
+        
+        self.contentScaleFactor=1.0;
     }
     return self;
 }
-
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setMultipleTouchEnabled:NO];
-        path = [UIBezierPath bezierPath];
-        [path setLineWidth:2.0];
-    }
-    return self;
-}
-
-
-
 
 
 - (void)drawRect:(CGRect)rect // (5)
 {
-    
-    [incrementalImage drawInRect:rect];
-    [lineColor setStroke];
-    [path stroke];
+        [incrementalImage drawInRect:rect];
+        [lineColor setStroke];
+        [path stroke];
   
 }
 
@@ -87,32 +73,17 @@
     
     [self performSelector:@selector(stop) withObject:nil afterDelay:15.0];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-//        UITouch *touch = [touches anyObject];
-//        CGPoint p = [touch locationInView:self];
-//        [self.path moveToPoint:p];
-        
+    
         ctr = 0;
         UITouch *touch = [touches anyObject];
         pts[0] = [touch locationInView:self];
         
-    });
-    
-    
-
    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-    
-   dispatch_async(dispatch_get_main_queue(), ^{
-//       UITouch *touch = [touches anyObject];
-//       CGPoint p = [touch locationInView:self];
-//       [self.path addLineToPoint:p]; // (4)
-//       [self setNeedsDisplay];
-       
        UITouch *touch = [touches anyObject];
        CGPoint p = [touch locationInView:self];
        ctr++;
@@ -131,10 +102,6 @@
            ctr = 1;
        }
 
-       
-   });
-    
-    
     
 }
 
@@ -148,8 +115,7 @@
     [self setNeedsDisplay];
     
     //this line removes the drawing
-   // [path removeAllPoints];
-    //ctr = 0;
+       ctr = 0;
     
     
 }
@@ -340,9 +306,7 @@
 
 - (void)drawBitmap
 {
-   dispatch_async(dispatch_get_main_queue(), ^{
-      
-       
+    
        UIGraphicsBeginImageContextWithOptions(self.bounds.size, YES, 0.0);
        
        if (!incrementalImage) // first time; paint background white
@@ -356,7 +320,6 @@
        [path stroke];
        incrementalImage = UIGraphicsGetImageFromCurrentImageContext();
        UIGraphicsEndImageContext();
-   });
 }
 
 
