@@ -137,6 +137,8 @@ static NSString *URLSchemeForVersion(NSString *version)
       NSLog(@"messenger opened");
       [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"messenger"];
       
+      [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"saved"];
+      
   }
 }
 
