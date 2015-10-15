@@ -314,7 +314,7 @@
            [rectpath fill];
        }
        [incrementalImage drawAtPoint:CGPointZero];
-       [[UIColor blackColor] setStroke];
+       [lineColor setStroke];
        [path stroke];
        incrementalImage = UIGraphicsGetImageFromCurrentImageContext();
        UIGraphicsEndImageContext();

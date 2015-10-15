@@ -74,6 +74,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (readwrite, nonatomic, copy, nullable) UIColor *color;
 
+
+
 /// @name Managing the Delegate
 
 /**

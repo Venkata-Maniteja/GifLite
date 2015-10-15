@@ -289,8 +289,23 @@
 #pragma mark - FCColorPickerViewControllerDelegate Methods
 
 -(void)colorPickerViewController:(FCColorPickerViewController *)colorPicker didSelectColor:(UIColor *)color {
-    self.drawView.lineColor = color;
-    [self.drawView erase];
+   
+    
+    self.drawView.path=nil;
+    
+    UIBezierPath *newPath=[UIBezierPath bezierPath];
+    
+    self.drawView.path=newPath;
+    
+     self.drawView.lineColor = color;
+    
+    [self.drawView.path setLineWidth:6.0];
+
+    
+    [self.drawView setNeedsDisplay];
+    
+    
+    //[self.drawView erase]; do not erase after selecting color
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

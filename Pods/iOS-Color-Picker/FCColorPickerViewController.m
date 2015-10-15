@@ -70,6 +70,7 @@
     [self updateBrightnessPosition];
     [self updateGradientColor];
     [self updateCrosshairPosition];
+    [self updateBrightnessWithMovement:CGPointMake(11.0, 282.0)];
     _swatch.color = _color;
     self.tintColor = self.tintColor;
     self.backgroundColor = self.backgroundColor;
@@ -155,6 +156,9 @@
     brightnessPosition.x = (1.0-currentBrightness)*_gradientView.frame.size.width + _gradientView.frame.origin.x;
     brightnessPosition.y = _gradientView.center.y;
     _brightnessBar.center = brightnessPosition;
+    
+    
+   
 }
 
 - (void)updateCrosshairPosition {
@@ -215,6 +219,8 @@
     
 	_brightnessBar.layer.backgroundColor = _color.CGColor;
     _swatch.color = _color;
+    
+     NSLog(@"brightness position is %f",_brightnessBar.center.y);
 }
 
 #pragma mark - Touch Handling
