@@ -16,9 +16,9 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import "SettingsViewController.h"
 
-
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<SliderProtocolDelegate>
 
 @property (nonatomic,strong) IBOutlet myDrawView *drawView;
 @property (nonatomic,strong) IBOutlet UIView *buttonHolder;

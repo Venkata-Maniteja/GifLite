@@ -7,11 +7,18 @@
 //
 
 #import "ViewController.h"
+#import "SettingsViewController.h"
 
-
-@interface ViewController ()<FCColorPickerViewControllerDelegate,MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate,FBSDKSharingDelegate>
+@interface ViewController ()<FCColorPickerViewControllerDelegate,MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate>
 @property (strong, nonatomic) UIButton *messengerButton;
 @property (strong, nonatomic) IBOutlet UIView *shareButtonView;
+@property (strong,nonatomic) IBOutlet UIButton *clearBut;
+@property (strong,nonatomic) IBOutlet UIButton *colorBut;
+@property (strong,nonatomic) IBOutlet UIButton *settingsBut;
+@property (strong,nonatomic) IBOutlet UIButton *infoBut;
+
+@property (strong,nonatomic) UIColor *buttonHolderColor;
+
 
 @end
 
@@ -26,7 +33,9 @@
 //    [timerLabel setHidden:YES];
     viewDidAppear=NO;
     
+    SettingsViewController *settings = [[SettingsViewController alloc] init];
     
+    settings.delegate = self;
     
     [self performSelector:@selector(runOnlyOneTime) withObject:nil afterDelay:2.0];
     
@@ -100,7 +109,10 @@
     
     [super viewDidAppear:animated];
     
+    
     if (!viewDidAppear) {
+        
+        self.buttonHolderColor=self.buttonHolder.backgroundColor;
         
         viewDidAppear=YES;
 
@@ -159,7 +171,7 @@
     //after i chose the color, this again called on viewdidappear,so im calling this in viewdidload after a delay,so it doesnt get called on viewdidappear
     
      self.timerShareButton=  [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(checkForShareEnableButton) userInfo:nil repeats:YES];
-    
+    self.drawView.backGroundCol=[UIColor whiteColor];
     self.drawView.lineColor=[UIColor blackColor];
     self.drawView.lineWidth=6.0;
     [self.drawView setNeedsDisplay];
@@ -342,6 +354,86 @@
 
 
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"delegateSegue"]) {
+       
+        SettingsViewController *settingsVC = (SettingsViewController *) segue.destinationViewController;
+        [settingsVC setDelegate:self];
+        
+        
+    }
+}
+
+
+
+#pragma mark Settings delegate
+-(void)sliderValue:(NSUInteger)value{
+    
+    NSLog(@"Called %d",value);
+    
+    self.drawView.path=nil;
+    
+    UIBezierPath *newPath=[UIBezierPath bezierPath];
+    
+    self.drawView.path=newPath;
+    
+//    self.drawView.lineColor = color;
+    
+    [self.drawView.path setLineWidth:value];
+    
+    
+    [self.drawView setNeedsDisplay];
+}
+
+
+-(void)themeSelected:(NSUInteger)value{
+    
+    if (value==0) {
+        
+        self.drawView.backgroundColor=[UIColor blackColor];
+        self.buttonHolder.backgroundColor=[UIColor blackColor];
+        self.drawView.lineColor=[UIColor whiteColor];
+        self.drawView.backGroundCol=[UIColor blackColor];
+        self.drawView.themeSet=YES;
+        [self.drawView setNeedsDisplay];
+        
+        [self.drawView erase];
+        
+    }else{
+        
+        self.drawView.backgroundColor=[UIColor whiteColor];
+        self.buttonHolder.backgroundColor=self.buttonHolderColor;
+        self.drawView.lineColor=[UIColor whiteColor];
+        self.drawView.backGroundCol=[UIColor whiteColor];
+        self.drawView.themeSet=NO;
+        [self.drawView setNeedsDisplay];
+        
+        [self.drawView erase];
+    }
+    
+}
+
+- (IBAction)settingsButtonAction:(id)sender {
+    
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    
+    
+    SettingsViewController *settings = [story instantiateViewControllerWithIdentifier:@"Settings"];
+    
+    
+    
+    settings.delegate=self;
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:settings];
+    
+   // settings.delegate = nav.delegate;
+    
+    [self presentViewController:nav animated:YES completion:^{
+        
+    }];
+}
 
 
 @end

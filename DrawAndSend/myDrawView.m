@@ -30,7 +30,7 @@
         [self setUserInteractionEnabled:YES];
         
         img=[[NSMutableArray alloc]init];
-        [self setBackgroundColor:[UIColor whiteColor]];
+     //   [self setBackgroundColor:self.backGroundCol];
         path = [UIBezierPath bezierPath];
         [path setLineWidth:self.lineWidth];
         
@@ -310,7 +310,9 @@
        if (!incrementalImage) // first time; paint background white
        {
            UIBezierPath *rectpath = [UIBezierPath bezierPathWithRect:self.bounds];
-           [[UIColor whiteColor] setFill];
+           if (!self.themeSet) {
+               [[UIColor whiteColor] setFill];
+           }
            [rectpath fill];
        }
        [incrementalImage drawAtPoint:CGPointZero];

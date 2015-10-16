@@ -13,9 +13,12 @@
 
 @property (nonatomic,strong) UIBezierPath *path;
 @property (nonatomic,strong) UIColor *lineColor;
+@property (nonatomic,strong) UIColor *backGroundCol;
 @property (nonatomic,assign) NSUInteger lineWidth;
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) NSMutableArray *img;
+
+@property (assign) BOOL themeSet;
 
 -(void)erase;
 -(void)stop;
