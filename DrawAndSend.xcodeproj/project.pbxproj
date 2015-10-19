@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B81654291BD15BE7007ABA1C /* black.png in Resources */ = {isa = PBXBuildFile; fileRef = B81654271BD15BE7007ABA1C /* black.png */; settings = {ASSET_TAGS = (); }; };
+		B816542A1BD15BE7007ABA1C /* color.png in Resources */ = {isa = PBXBuildFile; fileRef = B81654281BD15BE7007ABA1C /* color.png */; settings = {ASSET_TAGS = (); }; };
+		B816542C1BD18D09007ABA1C /* animated.gif in Resources */ = {isa = PBXBuildFile; fileRef = B816542B1BD18D09007ABA1C /* animated.gif */; settings = {ASSET_TAGS = (); }; };
 		B8603B3A1BC6BB8E00A5D642 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8603B391BC6BB8E00A5D642 /* main.m */; };
 		B8603B3D1BC6BB8E00A5D642 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8603B3C1BC6BB8E00A5D642 /* AppDelegate.m */; };
 		B8603B401BC6BB8E00A5D642 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8603B3F1BC6BB8E00A5D642 /* ViewController.m */; };
@@ -27,6 +30,9 @@
 
 /* Begin PBXFileReference section */
 		A986D4C429798EC1E700F16C /* libPods-DrawAndSend.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawAndSend.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B81654271BD15BE7007ABA1C /* black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black.png; sourceTree = "<group>"; };
+		B81654281BD15BE7007ABA1C /* color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = color.png; sourceTree = "<group>"; };
+		B816542B1BD18D09007ABA1C /* animated.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = animated.gif; sourceTree = "<group>"; };
 		B8603B351BC6BB8D00A5D642 /* DrawAndSend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawAndSend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8603B391BC6BB8E00A5D642 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B8603B3B1BC6BB8E00A5D642 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -122,7 +128,10 @@
 				B8603B501BC6BFB500A5D642 /* myDrawView.m */,
 				B89E6E4D1BD00A4A000A07E5 /* SettingsViewController.h */,
 				B89E6E4E1BD00A4A000A07E5 /* SettingsViewController.m */,
+				B81654271BD15BE7007ABA1C /* black.png */,
+				B81654281BD15BE7007ABA1C /* color.png */,
 				B89E6E541BD0295E000A07E5 /* cvCell.h */,
+				B816542B1BD18D09007ABA1C /* animated.gif */,
 				B89E6E551BD0295E000A07E5 /* cvCell.m */,
 				B8603B411BC6BB8E00A5D642 /* Main.storyboard */,
 				B89E6E521BD02865000A07E5 /* cvCell.xib */,
@@ -204,11 +213,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B816542A1BD15BE7007ABA1C /* color.png in Resources */,
 				B89E6E4C1BD004B1000A07E5 /* settings.png in Resources */,
 				B8603B481BC6BB8E00A5D642 /* LaunchScreen.storyboard in Resources */,
+				B816542C1BD18D09007ABA1C /* animated.gif in Resources */,
 				B8603B451BC6BB8E00A5D642 /* Assets.xcassets in Resources */,
 				B89E6E531BD02865000A07E5 /* cvCell.xib in Resources */,
 				B8603B431BC6BB8E00A5D642 /* Main.storyboard in Resources */,
+				B81654291BD15BE7007ABA1C /* black.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

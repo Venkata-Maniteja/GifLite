@@ -24,29 +24,26 @@
 
 @property (strong,nonatomic) IBOutlet UILabel *sliderValueLabel;
 
-@property (nonatomic, strong) NSArray *dataArray;
-
 @property (assign) NSUInteger themeSelected;
+
+@property (assign) BOOL isThemeSelected;
 
 
 @end
 
 @implementation SettingsViewController
 
-@synthesize slider,sliderValueLabel,themeSelected;
+@synthesize slider,sliderValueLabel,themeSelected,isThemeSelected;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     themeSelected=100;
     
-    NSMutableArray *firstSection = [[NSMutableArray alloc] init];
-           [firstSection addObject:@"Black and White"];
-    [firstSection addObject:@"Neon"];
-    [firstSection addObject:@"Lovely Hearts"];
+    isThemeSelected=NO;
     
-    self.dataArray = [[NSArray alloc] initWithObjects:firstSection, nil];
     
+       
     [self->themecollectionView registerClass:[cvCell class] forCellWithReuseIdentifier:@"cvCell"];
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -98,7 +95,10 @@
     
     [self.delegate sliderValue:(int)slider.value];
     
-    [self.delegate themeSelected:themeSelected];
+    if (isThemeSelected) {
+        [self.delegate themeSelected:themeSelected];
+    }
+    
     
     [self dismissViewControllerAnimated:YES completion:^{
         
@@ -108,12 +108,12 @@
 
 #pragma mark -Collection view delegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return [self.dataArray count];
+    return 1;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSMutableArray *sectionArray = [self.dataArray objectAtIndex:section];
-    return [sectionArray count];
+    
+    return 3;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,13 +125,14 @@
     cell.backgroundColor = [UIColor whiteColor];
     cell.layer.borderColor=[[UIColor clearColor]CGColor];
     cell.layer.borderWidth=0.0;
-
     
-    NSMutableArray *data = [self.dataArray objectAtIndex:indexPath.section];
     
-    NSString *cellData = [data objectAtIndex:indexPath.row];
-    
-    [cell.titleLabel setText:cellData];
+    if (indexPath.row==0) {
+        cell.backImage.image=[UIImage imageNamed:@"color.png"];
+    }else if (indexPath.row==1){
+    cell.backImage.image=[UIImage imageNamed:@"black.png"];
+    }
+   
     
     return cell;
     
@@ -146,6 +147,8 @@
     
     themeSelected=indexPath.row;
     
+    isThemeSelected=YES;
+    
    // cell.backgroundColor = [UIColor magentaColor];
     
 }
@@ -156,6 +159,8 @@
     cell.layer.borderColor=[[UIColor clearColor]CGColor];
     cell.layer.borderWidth=0.0;
     cell.backgroundColor = [UIColor whiteColor];
+    
+    isThemeSelected=NO;
 }
 
 

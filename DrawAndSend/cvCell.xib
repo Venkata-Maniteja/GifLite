@@ -18,13 +18,6 @@
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.27303354369999999" blue="0.362922209" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VkX-w0-GNh">
-                        <rect key="frame" x="129" y="64" width="42" height="21"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -33,8 +26,6 @@
             <constraints>
                 <constraint firstItem="czF-2W-MqA" firstAttribute="centerX" secondItem="JIS-rh-BuP" secondAttribute="centerX" id="Kf6-rw-ZVg"/>
                 <constraint firstItem="czF-2W-MqA" firstAttribute="top" secondItem="JIS-rh-BuP" secondAttribute="top" constant="16" id="Nal-pd-VQ1"/>
-                <constraint firstItem="VkX-w0-GNh" firstAttribute="centerX" secondItem="JIS-rh-BuP" secondAttribute="centerX" id="QbM-mm-CdB"/>
-                <constraint firstItem="VkX-w0-GNh" firstAttribute="centerY" secondItem="JIS-rh-BuP" secondAttribute="centerY" id="f25-be-3Fy"/>
                 <constraint firstItem="czF-2W-MqA" firstAttribute="leading" secondItem="JIS-rh-BuP" secondAttribute="leading" constant="40" id="iZC-MD-NOt"/>
                 <constraint firstAttribute="bottom" secondItem="czF-2W-MqA" secondAttribute="bottom" constant="16" id="ksi-ka-Y0x"/>
                 <constraint firstAttribute="trailing" secondItem="czF-2W-MqA" secondAttribute="trailing" constant="40" id="ojy-zY-WB3"/>
@@ -42,7 +33,7 @@
             </constraints>
             <size key="customSize" width="217" height="182"/>
             <connections>
-                <outlet property="titleLabel" destination="VkX-w0-GNh" id="tTm-2R-4KN"/>
+                <outlet property="backImage" destination="czF-2W-MqA" id="Z6u-K8-TK4"/>
             </connections>
             <point key="canvasLocation" x="356" y="50"/>
         </collectionViewCell>

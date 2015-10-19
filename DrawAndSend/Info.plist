@@ -23,16 +23,16 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1626007617661728</string>
+				<string>fb1504769923181403</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.2</string>
 	<key>FacebookAppID</key>
-	<string>1626007617661728</string>
+	<string>1504769923181403</string>
 	<key>FacebookDisplayName</key>
-	<string>GifLite</string>
+	<string>GifDrawPro</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

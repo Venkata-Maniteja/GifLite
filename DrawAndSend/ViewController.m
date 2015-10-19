@@ -109,7 +109,6 @@
     
     [super viewDidAppear:animated];
     
-    
     if (!viewDidAppear) {
         
         self.buttonHolderColor=self.buttonHolder.backgroundColor;
@@ -196,10 +195,6 @@
     [super viewDidDisappear:animated];
 }
 
--(void)viewDidLayoutSubviews{
-    
-    NSLog(@"view did layout subviews");
-}
 
 
 -(void)expireAlert{
@@ -326,6 +321,25 @@
 }
 
 
+-(UIColor *)rainBowColors{
+    
+    NSMutableArray *colors = [NSMutableArray array];
+    
+    float INCREMENT = 0.05;
+    for (float hue = 0.0; hue < 1.0; hue += INCREMENT) {
+        UIColor *color = [UIColor colorWithHue:hue
+                                    saturation:1.0
+                                    brightness:1.0
+                                         alpha:1.0];
+        [colors addObject:color];
+    }
+    
+    
+    
+    return [colors objectAtIndex:0];
+}
+
+
 
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
@@ -378,10 +392,7 @@
     
     self.drawView.path=newPath;
     
-//    self.drawView.lineColor = color;
-    
     [self.drawView.path setLineWidth:value];
-    
     
     [self.drawView setNeedsDisplay];
 }
@@ -389,30 +400,63 @@
 
 -(void)themeSelected:(NSUInteger)value{
     
-    if (value==0) {
+    if (value==1) {
+        [self blackWhiteTheme];
         
-        self.drawView.backgroundColor=[UIColor blackColor];
-        self.buttonHolder.backgroundColor=[UIColor blackColor];
-        self.drawView.lineColor=[UIColor whiteColor];
-        self.drawView.backGroundCol=[UIColor blackColor];
-        self.drawView.themeSet=YES;
-        [self.drawView setNeedsDisplay];
+    }else if (value==0){
+        [self normalTheme];
         
-        [self.drawView erase];
+    }else if (value==2){
+        [self glazedTheme];
         
-    }else{
-        
-        self.drawView.backgroundColor=[UIColor whiteColor];
-        self.buttonHolder.backgroundColor=self.buttonHolderColor;
-        self.drawView.lineColor=[UIColor whiteColor];
-        self.drawView.backGroundCol=[UIColor whiteColor];
-        self.drawView.themeSet=NO;
-        [self.drawView setNeedsDisplay];
-        
-        [self.drawView erase];
     }
     
 }
+
+
+-(void)normalTheme{
+    self.drawView.backgroundColor=[UIColor whiteColor];
+    self.buttonHolder.backgroundColor=self.buttonHolderColor;
+    self.drawView.lineColor=[UIColor whiteColor];
+    self.drawView.backGroundCol=[UIColor whiteColor];
+    self.drawView.themeSet=NO;
+    self.drawView.incrementalImage=nil;
+    self.drawView.multiColorPath=NO;
+    [self.drawView setNeedsDisplay];
+    
+    [self.drawView erase];
+    
+}
+
+-(void)blackWhiteTheme{
+    
+    self.drawView.backgroundColor=[UIColor blackColor];
+    self.buttonHolder.backgroundColor=[UIColor blackColor];
+    self.drawView.lineColor=[UIColor whiteColor];
+    self.drawView.backGroundCol=[UIColor blackColor];
+    self.drawView.incrementalImage=nil;
+    self.drawView.themeSet=YES;
+    self.drawView.multiColorPath=NO;
+    [self.drawView setNeedsDisplay];
+    
+    [self.drawView erase];
+    
+}
+
+-(void)glazedTheme{
+    
+    self.drawView.backgroundColor=[UIColor whiteColor];
+    self.buttonHolder.backgroundColor=self.buttonHolderColor;
+    self.drawView.lineColor=[UIColor whiteColor];
+    self.drawView.backGroundCol=[UIColor whiteColor];
+    self.drawView.multiColorPath=YES;
+    self.drawView.themeSet=NO;
+    [self.drawView setNeedsDisplay];
+    
+    [self.drawView erase];
+    
+}
+
 
 - (IBAction)settingsButtonAction:(id)sender {
     

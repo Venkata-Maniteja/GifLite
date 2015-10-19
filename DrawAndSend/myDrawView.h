@@ -17,8 +17,10 @@
 @property (nonatomic,assign) NSUInteger lineWidth;
 @property (nonatomic,strong) NSTimer *timer;
 @property (nonatomic,strong) NSMutableArray *img;
+@property (nonatomic,strong) UIImage *incrementalImage;
 
 @property (assign) BOOL themeSet;
+@property (assign) BOOL multiColorPath;
 
 -(void)erase;
 -(void)stop;
