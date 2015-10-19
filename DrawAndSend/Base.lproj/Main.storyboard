@@ -70,7 +70,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by GifDrawPro" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-Jc-VSd">
-                                        <rect key="frame" x="0.0" y="295" width="194" height="21"/>
+                                        <rect key="frame" x="15" y="295" width="194" height="21"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="BjI-2F-7dJ"/>
@@ -84,7 +84,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Ydb-Jc-VSd" firstAttribute="leading" secondItem="qts-fh-jFp" secondAttribute="leading" id="6Gn-vz-NsX"/>
+                                    <constraint firstItem="Ydb-Jc-VSd" firstAttribute="leading" secondItem="qts-fh-jFp" secondAttribute="leading" constant="15" id="6Gn-vz-NsX"/>
                                     <constraint firstAttribute="bottom" secondItem="Ydb-Jc-VSd" secondAttribute="bottom" id="9CS-8j-Lqp"/>
                                     <constraint firstItem="pSQ-n0-SNH" firstAttribute="centerX" secondItem="qts-fh-jFp" secondAttribute="centerX" id="YkO-Y8-p57"/>
                                     <constraint firstItem="pSQ-n0-SNH" firstAttribute="centerY" secondItem="qts-fh-jFp" secondAttribute="centerY" id="sGi-XB-G2Q"/>
@@ -140,7 +140,7 @@
                             <constraint firstItem="KOf-xR-CUP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="F0f-RF-tXL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="qts-fh-jFp" secondAttribute="bottom" constant="20" id="FRU-mf-NsU"/>
                             <constraint firstItem="qts-fh-jFp" firstAttribute="top" secondItem="KOf-xR-CUP" secondAttribute="bottom" constant="4" identifier="drawViewTop" id="JnQ-km-aTH"/>
-                            <constraint firstItem="dMf-O0-wVS" firstAttribute="leading" secondItem="Ydb-Jc-VSd" secondAttribute="leading" constant="9" id="OFc-xn-TN9"/>
+                            <constraint firstItem="dMf-O0-wVS" firstAttribute="leading" secondItem="Ydb-Jc-VSd" secondAttribute="leading" constant="-6" id="OFc-xn-TN9"/>
                             <constraint firstItem="qts-fh-jFp" firstAttribute="top" secondItem="KOf-xR-CUP" secondAttribute="bottom" constant="4" id="Pim-OF-1qc"/>
                             <constraint firstItem="qts-fh-jFp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" identifier="drawViewTrailing" id="bB6-jn-yCj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Dku-Bm-7Xj" secondAttribute="trailing" constant="6" id="dhb-e7-DXC"/>
@@ -193,7 +193,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Olc-WO-Guv" userLabel="sliderHolder">
                                 <rect key="frame" x="20" y="72" width="696" height="49"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="l95-HN-RA4">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="4" maxValue="40" translatesAutoresizingMaskIntoConstraints="NO" id="l95-HN-RA4">
                                         <rect key="frame" x="103" y="10" width="303" height="31"/>
                                         <animations/>
                                         <constraints>
